@@ -61,8 +61,7 @@ wt = et.dot(u)
 wt = wt.dot(sig)
 wt = wt.dot(vt)
 
-# Get the indices of the top 10 songs.
-# We could look up the song title based on the index.
+# Get the title of the top 10 movies.
 w = wt.flatten()
 mids_sorted = np.argsort(w)
 top_recommendations = mids_sorted[:10]

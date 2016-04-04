@@ -1,3 +1,13 @@
+# Return the title of a movie.
+def movieTitleLookup(mid):
+  # line = open("u.item", "r",encoding='utf-8').readlines()[mid]
+  f = open('u.item','r',encoding='utf-8')
+  line = f.readline()
+  line = line.strip()
+  movie_id,movie_title,release_date,video_release_date,imdb_url,unknown,genres = line.split('|',6)
+  f.close()
+  print(movie_title)
+
 # Read in the data.
 f = open('u.data','r',encoding='utf-8')
 ratings = []
@@ -57,4 +67,6 @@ wt = wt.dot(vt)
 # We could look up the song title based on the index.
 w = wt.flatten()
 mids_sorted = np.argsort(w)
-print(mids_sorted[:10])
+top_recommendations = mids_sorted[:10]
+for i in top_recommendations:
+  movieTitleLookup(i)

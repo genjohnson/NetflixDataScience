@@ -39,7 +39,8 @@ uid = 25
 # Create et.
 m,n = u.shape
 
-i = 10
+# ID of the User to return recommendations for.
+i = 1
 
 data = np.array([1])
 columns = np.array([i-1])

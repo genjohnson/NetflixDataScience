@@ -1,12 +1,10 @@
 # Return the title of a movie.
 def movieTitleLookup(mid):
-  # line = open("u.item", "r",encoding='utf-8').readlines()[mid]
-  f = open('u.item','r',encoding='utf-8')
-  line = f.readline()
-  line = line.strip()
-  movie_id,movie_title,release_date,video_release_date,imdb_url,unknown,genres = line.split('|',6)
-  f.close()
-  print(movie_title)
+  with open('u.item','r',encoding='ISO-8859-1') as f:
+    line = f.readlines()[mid-1]
+    line = line.strip()
+    movie_id,movie_title,release_date,video_release_date,imdb_url,unknown,genres = line.split('|',6)
+    print(movie_title)
 
 # Read in the data.
 f = open('u.data','r',encoding='utf-8')

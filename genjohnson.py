@@ -20,8 +20,11 @@ users = np.array(users).astype(np.int32)
 movies = np.array(movies).astype(np.int32)
 A = scipy.sparse.csr_matrix((ratings, (users, movies)), dtype='d')
 
-# Find the k dominant singular values and vectors.
-k = 10
+# This is not optimal since there is no advantage to having k > rank(A),
+# but this is the largest value of k (number of dominant singular values
+# and vectors) we can pass to svds().
+k = min(A.shape)-1
+
 # u: Unitary matrix having left singular vectors as columns.
 # s: The singular values.
 # vt: Unitary matrix having right singular vectors as rows.

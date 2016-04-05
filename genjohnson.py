@@ -65,7 +65,7 @@ k = 150
 # u: Unitary matrix having left singular vectors as columns.
 # s: The singular values.
 # vt: Unitary matrix having right singular vectors as rows.
-u, s, vt = scipy.sparse.linalg.svds(A,k)
+u, s, vt = scipy.sparse.linalg.svds(B,k)
 
 # Create diagonal matrix with sigma values.
 sig = np.diag(s)

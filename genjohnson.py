@@ -15,8 +15,9 @@ for line in f.readlines():
     line = line.strip()
     i,j,rating,t = line.split('\t')
     ratings.append(rating)
-    users.append(i)
-    movies.append(j)
+    # Offset user and movie id's to account for zero-index rows/cols in matrix.
+    users.append(int(i)-1)
+    movies.append(int(j)-1)
 f.close()
 
 # Create a sparce matrix.
@@ -40,21 +41,17 @@ u, s, vt = scipy.sparse.linalg.svds(A,k)
 # Create diagonal matrix with sigma values.
 sig = np.diag(s)
 
-# Choose the index of a user.
+# Choose the index of a user to return recommendations for.
 uid = 25
 
 # Create et.
 m,n = u.shape
 
-# ID of the User to return recommendations for.
-i = 1
-
 data = np.array([1])
-columns = np.array([i-1])
+columns = np.array([uid-1]) # Offset uid to account for zero-index cols in matrix.
 rows = np.array([0])
 
 et = scipy.sparse.csr_matrix((data, (rows, columns)), shape=(1,m), dtype='d')
-
 # Multiply all of the matrices.
 wt = et.dot(u)
 wt = wt.dot(sig)
@@ -65,4 +62,4 @@ w = wt.flatten()
 mids_sorted = np.argsort(w)
 top_recommendations = mids_sorted[:10]
 for i in top_recommendations:
-  movieTitleLookup(i)
+  movieTitleLookup(int(i)+1) # Offset uid to account for zero-index rows in matrix.

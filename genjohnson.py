@@ -29,6 +29,16 @@ users = np.array(users).astype(np.int32)
 movies = np.array(movies).astype(np.int32)
 A = scipy.sparse.csr_matrix((ratings, (users, movies)), dtype='d')
 
+# Caculate the average rating provided by each user and the average rating
+# of each movie.
+M,N = A.shape
+
+row_sums = A.sum(axis=1)
+row_nnzs = A.getnnz(axis=1)
+average_rating_by_user = []
+for rid in range(M):
+    average_rating_by_user.append(float(row_sums[rid]/row_nnzs[rid]))
+
 # Choose the number of dominant singular values and vectors to return.
 # This is the number of characteristics to consider when making recommendations.
 k = 150

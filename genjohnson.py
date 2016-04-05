@@ -45,6 +45,19 @@ col_nnzs = A.getnnz(axis=0)
 for cid in range(N):
     average_rating_by_movie.append(float(col_sums[0,cid]/col_nnzs[cid]))
 
+# Adjust non-zero ratings to account for average per user and per movie.
+adjusted_ratings = []
+elements = A.nonzero()
+for i in range(len(elements[0])):
+    rating_user_index = elements[0][i]
+    rating_movie_index = elements[1][i]
+    adjusted_rating = ratings[i]-users[rating_user_index]-movies[rating_movie_index]
+    adjusted_ratings.append(adjusted_rating)
+adjusted_ratings = np.array(adjusted_ratings).astype(np.int32)
+
+# Create a sparce matrix of the adjusted ratings.
+B = scipy.sparse.csr_matrix((adjusted_ratings, (users, movies)), dtype='d')
+
 # Choose the number of dominant singular values and vectors to return.
 # This is the number of characteristics to consider when making recommendations.
 k = 150

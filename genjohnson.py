@@ -39,6 +39,12 @@ average_rating_by_user = []
 for rid in range(M):
     average_rating_by_user.append(float(row_sums[rid]/row_nnzs[rid]))
 
+average_rating_by_movie = []
+col_sums = A.sum(axis=0)
+col_nnzs = A.getnnz(axis=0)
+for cid in range(N):
+    average_rating_by_movie.append(float(col_sums[0,cid]/col_nnzs[cid]))
+
 # Choose the number of dominant singular values and vectors to return.
 # This is the number of characteristics to consider when making recommendations.
 k = 150

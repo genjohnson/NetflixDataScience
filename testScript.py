@@ -145,12 +145,13 @@ while True:
 		counter += 1		
 		if( counter == 15 ):
 			break
-	
-
-	print( "for k = " + str(outerCounter) )
-	print("3 or above : " + str( total3 / float(totalCounter) * 100 ))
-	print("4 or above : " + str( total4 / float(totalCounter) * 100 ))
-	print("5 or above : " + str( total5 / float(totalCounter) * 100 ))
+		
+	#print( str( float(outerCounter) / 150 * 100) ) 
+	#print( "for k = " + str(outerCounter) )
+	#print("3 or above : " + str( total3 / float(totalCounter) * 100 ))
+	#print("4 or above : " + str( total4 / float(totalCounter) * 100 ))
+	#print("5 or above : " + str( total5 / float(totalCounter) * 100 ))
+	print("%d,%d,%d,%d" % ( outerCounter, (total3/float(totalCounter) * 100), (total4/float(totalCounter)*100), (total5/float(totalCounter)*100)))
 
 	outerCounter += 1
 	if( outerCounter == 150 ) : 

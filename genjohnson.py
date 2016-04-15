@@ -76,7 +76,7 @@ def recommendMoviesForUser(uid, num_movies):
   m,n = u.shape
 
   data = np.array([1])
-  columns = np.array([uid - 1]) # Offset uid to account for zero-index cols in matrix.
+  columns = np.array([uid - 1])  # Offset uid to account for zero-index cols in matrix.
   rows = np.array([0])
 
   et = scipy.sparse.csr_matrix((data, (rows, columns)), shape=(1, m), dtype='d')
@@ -90,6 +90,6 @@ def recommendMoviesForUser(uid, num_movies):
   mids_sorted = np.argsort(w)
   top_recommendations = mids_sorted[:num_movies]
   for i in top_recommendations:
-    movieTitleLookup(int(i) + 1) # Offset uid to account for zero-index rows in matrix.
+    movieTitleLookup(int(i) + 1)  # Offset uid to account for zero-index rows in matrix.
 
 recommendMoviesForUser(uid=5, num_movies=10)

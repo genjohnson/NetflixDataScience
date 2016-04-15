@@ -2,18 +2,26 @@ import numpy as np
 import scipy.sparse
 from scipy.sparse import linalg
 
-# Return the title of a movie.
 def movieTitleLookup(mid):
+  """
+  Print the title of a movie.
+
+  Arguments:
+  mid -- the ID of a movie
+  """
   with open('u.item', 'r', encoding='ISO-8859-1') as f:
     line = f.readlines()[mid - 1]
     line = line.strip()
     movie_id, movie_title, release_date, video_release_date, imdb_url, unknown,genres = line.split('|', 6)
     print(movie_title)
 
-# Return the svd of the matrix of adjusted ratings.
-# @param int k: the number of dominant singular values and vectors to return.
-    # This is the number of characteristics to consider when making recommendations.
 def svd(k=150):
+  """
+  Return the singular value decomposition of a matrix of adjusted ratings.
+
+  Arguments:
+  k -- the number of singular values to return (default 150)
+  """
   # Read in the data.
   f = open('u.data', 'r', encoding='utf-8')
   ratings = []
@@ -65,9 +73,14 @@ def svd(k=150):
 
   return scipy.sparse.linalg.svds(B, k)
 
-# @param int uid: the user ID to return recommendations for.
-# @param int num_movies: the number of movies to recommend.
 def recommendMoviesForUser(uid, num_movies):
+  """
+  Return recommended movies for a given user.
+
+  Arguments:
+  uid -- the ID of a user to return recommendations for
+  num_movies -- the number of movies to recommend
+  """
   u, s, vt = svd()
   # Create diagonal matrix with sigma values.
   sig = np.diag(s)

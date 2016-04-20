@@ -24,8 +24,45 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<h1>Movie Recommendations</br><small>using Singular Value Decomposition</small></h1>
+					<p>
+						Group members: Boogun Choi, Genevieve Johnson, Zhengnan Hong
+					</p>
+				</section>
+				<section>
+					<h2>Real-life Applications</h2>
+					<ul>
+						<li>Netflix</li>
+						<li>Amazon</li>
+					<ul>
+				</section>
+				<section>
+					<h2>Movie Lens 100K Dataset</h2>
+					<p>100,000 ratings from 1000 users on 1700 movies</p>
+					<a href="http://grouplens.org/datasets/movielens/100k/">http://grouplens.org/datasets/movielens/100k/</a>
+				</section>
+				<section>
+					<h2>What is Singular Value Decomposition?</h2>
+					<p>Refer to slides from David Stewart: https://icon.uiowa.edu/d2l/le/content/2456868/viewContent/4420390/View<p>
+				</section>
+				<section>
+					Created a matrix, where each row corresponds to a user each column corresponds to a movie. This is a sparce matrix (A), since there are 1700 movies, and each user has rated relitively few of them.
+
+					We then adjusted each of the ratings to account for user bias and movies that consistently have extreme ratings. This gave us matrix B.
+
+						Some users really like movies in general, and tend to give them higher ratings on average, so we accounted for this by calculating the average rating each user provided and subtracting this from each of their ratings.
+
+						Then from each of these adjusted ratings we subtracted the average rating of that movie provided by all users.
+
+
+					Since we are working with such a large, sparce matrix, we needed to make a choice for the value of k to pass to the SVD(S) function. k corresponds to the number of characteristics of a movie to take into account when creating the recommendations, for example genre, lead actors, etc. [Add explanation of how we chose which value of k to use -- trial and visual inspection of results]
+
+					Then we applied SVD to matrix B and chose a user to make recommendations for. This process is similar to the lab assignment that we completed for class.
+
+
+
+				</section>
 			</div>
 		</div>
 

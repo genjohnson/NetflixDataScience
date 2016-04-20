@@ -59,9 +59,16 @@
 					Since we are working with such a large, sparce matrix, we needed to make a choice for the value of k to pass to the SVD(S) function. k corresponds to the number of characteristics of a movie to take into account when creating the recommendations, for example genre, lead actors, etc. [Add explanation of how we chose which value of k to use -- trial and visual inspection of results]
 
 					Then we applied SVD to matrix B and chose a user to make recommendations for. This process is similar to the lab assignment that we completed for class.
-
-
-
+				</section>
+				<section>
+					<h2>Adjustments made to adjusted ratings in matrix B and how these adjustments affected the recommendations</h2>
+				</section>
+				<section>
+					<ul>
+						<li>cache SVD because this is an "expensive" calculation and people don't need updated recommendations constantly</li>
+						<li>account for timestamp of rating</li>
+						<li>more specifically account for user demographics/preferences by using smaller matrices -- eg, if user x is a woman looking for recommendations of horror movies, only use ratings provided by other women who have watched horror movies</li>
+					</ul>
 				</section>
 			</div>
 		</div>

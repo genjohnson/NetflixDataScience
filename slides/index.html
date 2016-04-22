@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Movie Recommendations</br><small>using Singular Value Decomposition</small></h1>
+					<p>
+						Group members: Boogun Choi, Genevieve Johnson, Zhengnan Hong
+					</p>
+				</section>
+				<section>
+					<h2>Real-life Applications</h2>
+					<ul>
+						<li>Netflix</li>
+						<li>Amazon</li>
+					<ul>
+				</section>
+				<section>
+					<h2>Movie Lens 100K Dataset</h2>
+					<p>100,000 ratings from 1000 users on 1700 movies</p>
+					<a href="http://grouplens.org/datasets/movielens/100k/">http://grouplens.org/datasets/movielens/100k/</a>
+				</section>
+				<section>
+					<h2>What is Singular Value Decomposition?</h2>
+					<p>Refer to slides from David Stewart: https://icon.uiowa.edu/d2l/le/content/2456868/viewContent/4420390/View<p>
+				</section>
+				<section>
+					Created a matrix, where each row corresponds to a user each column corresponds to a movie. This is a sparce matrix (A), since there are 1700 movies, and each user has rated relitively few of them.
+
+					We then adjusted each of the ratings to account for user bias and movies that consistently have extreme ratings. This gave us matrix B.
+
+						Some users really like movies in general, and tend to give them higher ratings on average, so we accounted for this by calculating the average rating each user provided and subtracting this from each of their ratings.
+
+						Then from each of these adjusted ratings we subtracted the average rating of that movie provided by all users.
+
+
+					Since we are working with such a large, sparce matrix, we needed to make a choice for the value of k to pass to the SVD(S) function. k corresponds to the number of characteristics of a movie to take into account when creating the recommendations, for example genre, lead actors, etc. [Add explanation of how we chose which value of k to use -- trial and visual inspection of results]
+
+					Then we applied SVD to matrix B and chose a user to make recommendations for. This process is similar to the lab assignment that we completed for class.
+				</section>
+				<section>
+					<h2>Adjustments made to adjusted ratings in matrix B and how these adjustments affected the recommendations</h2>
+				</section>
+				<section>
+					<ul>
+						<li>cache SVD because this is an "expensive" calculation and people don't need updated recommendations constantly</li>
+						<li>account for timestamp of rating</li>
+						<li>more specifically account for user demographics/preferences by using smaller matrices -- eg, if user x is a woman looking for recommendations of horror movies, only use ratings provided by other women who have watched horror movies</li>
+					</ul>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>

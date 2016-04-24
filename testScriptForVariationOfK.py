@@ -67,7 +67,7 @@ for x in indexPosition:
 	ratingForUserID.append( ratings[x] )
 
 
-print("%s\t%s\t%s" % ("K", "MovieName", "rating"))
+print("%s,\t%s,\t%s" % ("K", "MovieName", "rating"))
 
 outerCounter = 1
 while True:
@@ -162,7 +162,7 @@ while True:
 			title = movieTitleLookup(x)
 			print("%s,\t%s,\t%s" % ("   ", title, modifiedRatings[counterCT]))
 			counterCT += 1
-	print()
+	print(" , , ")
 
 			
 	#print("Counter : " + str(ct) + " with user# " + str(i) )

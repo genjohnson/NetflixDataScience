@@ -4,6 +4,7 @@ def movieTitleLookup(mid):
     line = f.readlines()[mid-1]
     line = line.strip()
     movie_id,movie_title,release_date,video_release_date,imdb_url,unknown,genres = line.split('|',6)
+    movie_title = movie_title.replace(',', ' ')
     return movie_title
 
 # Read in the data.

@@ -67,7 +67,7 @@ for x in indexPosition:
 	ratingForUserID.append( ratings[x] )
 
 
-print("%s,\t%s,\t%s" % ("K", "MovieName", "rating"))
+print("%s,\t%s,\t%s, \t%s" % ("K", "MovieName", "Characteristic Rating", "rating"))
 
 outerCounter = 1
 while True:
@@ -118,6 +118,8 @@ while True:
 	mids_sorted = np.argsort(w)
 	top_recommendations = mids_sorted[:10]
 	
+	w = sorted(w, reverse=True)
+
 	movie3Rating = 0
 	movie4Rating = 0
 	movie5Rating = 0
@@ -156,13 +158,13 @@ while True:
 	for x in top_recommendations: 
 		if( counterCT == 0 ):
 			title = movieTitleLookup(x)
-			print("%s,\t%s,\t%s" % ( str(outerCounter), title, modifiedRatings[counterCT] ))				
+			print("%s,\t%s,\t%s, \t%s" % ( str(outerCounter), title, str(int(w[counterCT])), modifiedRatings[counterCT] ))				
 			counterCT += 1
 		else:
 			title = movieTitleLookup(x)
-			print("%s,\t%s,\t%s" % ("   ", title, modifiedRatings[counterCT]))
+			print("%s,\t%s,\t%s, \t%s" % ("   ", title, str(int(w[counterCT])) ,modifiedRatings[counterCT]))
 			counterCT += 1
-	print(" , , ")
+	print(" , , , ")
 
 			
 	#print("Counter : " + str(ct) + " with user# " + str(i) )

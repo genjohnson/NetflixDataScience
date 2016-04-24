@@ -15,7 +15,7 @@ def movieTitleLookup(mid):
     movie_id, movie_title, release_date, video_release_date, imdb_url, unknown,genres = line.split('|', 6)
     print(movie_title)
 
-def svd(k=150):
+def svd(k=26):
   """
   Return the singular value decomposition of a matrix of adjusted ratings.
 

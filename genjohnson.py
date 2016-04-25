@@ -66,7 +66,6 @@ def svd(k=26):
     rating_movie_index = elements[1][i]
     adjusted_rating = ratings[i] - users[rating_user_index] - movies[rating_movie_index]
     adjusted_ratings.append(adjusted_rating)
-  adjusted_ratings = np.array(adjusted_ratings).astype(np.int32)
 
   # Create a sparce matrix of the adjusted ratings.
   B = scipy.sparse.csr_matrix((adjusted_ratings, (users, movies)), dtype='d')

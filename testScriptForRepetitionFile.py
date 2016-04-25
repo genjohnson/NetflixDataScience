@@ -1,4 +1,4 @@
-# test script for the repetition file
+# script for the repetition file
 import sys
 
 def watchTest( uID, movies ):

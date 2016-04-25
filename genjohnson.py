@@ -42,6 +42,10 @@ def svd(k=26):
   movies = np.array(movies).astype(np.int32)
   A = scipy.sparse.csr_matrix((ratings, (users, movies)), dtype='d')
 
+  # Calculate global average rating
+  global_average_rating = ratings.mean()
+  N = 25
+
   # Caculate the average rating provided by each user and the average rating
   # of each movie.
   M,N = A.shape
@@ -53,10 +57,14 @@ def svd(k=26):
     average_rating_by_user.append(float(row_sums[rid] / row_nnzs[rid]))
 
   average_rating_by_movie = []
+  better_average_rating_by_movie = []
   col_sums = A.sum(axis=0)
   col_nnzs = A.getnnz(axis=0)
   for cid in range(N):
     average_rating_by_movie.append(float(col_sums[0,cid] / col_nnzs[cid]))
+    # test = (global_average_rating*N + col_sums[0,cid])
+    # test2 = (N + col_nnzs[cid])
+    better_average_rating_by_movie.append(((global_average_rating*N + col_sums[0,cid]) / (N + col_nnzs[cid])))
 
   # Adjust non-zero ratings to account for average per user and per movie.
   adjusted_ratings = []
@@ -64,7 +72,7 @@ def svd(k=26):
   for i in range(len(elements[0])):
     rating_user_index = elements[0][i]
     rating_movie_index = elements[1][i]
-    adjusted_rating = ratings[i] - average_rating_by_user[rating_user_index] - average_rating_by_movie[rating_movie_index]
+    adjusted_rating = ratings[i] - average_rating_by_user[rating_user_index] - better_average_rating_by_movie[rating_movie_index] #average_rating_by_movie[rating_movie_index]
     adjusted_ratings.append(adjusted_rating)
 
   # Create a sparce matrix of the adjusted ratings.

@@ -44,7 +44,7 @@ def svd(k=26):
 
   # Calculate global average rating
   global_average_rating = ratings.mean()
-  L = 1000000000
+  L = 1000000
 
   # Caculate the average rating provided by each user and the average rating
   # of each movie.

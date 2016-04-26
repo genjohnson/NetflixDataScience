@@ -39,26 +39,22 @@
 				</section>
 				<section>
 					<h2>Movie Lens 100K Dataset</h2>
-					<p>100,000 ratings from 1000 users on 1700 movies</p>
-					<a href="http://grouplens.org/datasets/movielens/100k/">http://grouplens.org/datasets/movielens/100k/</a>
+					<p><a href="http://grouplens.org/datasets/movielens/100k/">http://grouplens.org/datasets/movielens/100k/</a></p>
+					<ul>
+						<li>100,000 ratings from 943 users on 1682 movies</li>
+						<li>Each user has rated at least 20 movies</li>
+						<li>Simple demographic info for the users (age, gender, occupation, zip)</li>
+					</ul>
 				</section>
 				<section>
-					<h2>What is Singular Value Decomposition?</h2>
-					<p>Refer to slides from David Stewart: https://icon.uiowa.edu/d2l/le/content/2456868/viewContent/4420390/View<p>
+					<h2>Low-rank matrix approximation</h2>
+					<p>Approximate a matrix A with another matrix A' (truncated) which has a specific rank k</p>
 				</section>
 				<section>
-					Created a matrix, where each row corresponds to a user each column corresponds to a movie. This is a sparce matrix (A), since there are 1700 movies, and each user has rated relitively few of them.
-
-					We then adjusted each of the ratings to account for user bias and movies that consistently have extreme ratings. This gave us matrix B.
-
-						Some users really like movies in general, and tend to give them higher ratings on average, so we accounted for this by calculating the average rating each user provided and subtracting this from each of their ratings.
-
-						Then from each of these adjusted ratings we subtracted the average rating of that movie provided by all users.
-
-
-					Since we are working with such a large, sparce matrix, we needed to make a choice for the value of k to pass to the SVD(S) function. k corresponds to the number of characteristics of a movie to take into account when creating the recommendations, for example genre, lead actors, etc. [Add explanation of how we chose which value of k to use -- trial and visual inspection of results]
-
-					Then we applied SVD to matrix B and chose a user to make recommendations for. This process is similar to the lab assignment that we completed for class.
+					<h3>Apply Singular Value Decomposition</h3>
+					<p>A = UΣV</p>
+					<p>A' = UΣ'V</br>
+					where Σ' is the same matrix as Σ except that it contains only the k largest singular values</p>
 				</section>
                                 <section>
                                         <h2>Adjustments made to adjusted ratings in matrix B and how these adjustments affected the recommendations</h2>
@@ -96,7 +92,6 @@
 								<li>Simple SVD by python library</li>
 								<li>Recommends top10 movieID</li>
 								<li>Visual Observation for the evaulation of result</li>
-								<li>Name Conversion</li>
 							</ul>
 							<li>Problem:</li>
 							<ul>
@@ -147,9 +142,6 @@
 					<h2>Tests for changes in K</h2>
 					<img src="image/kVar.png" width="100%"/>
 				</section>
-				<section>
-					<h2>Tests for Changes in K</h2>
-				</section>
                                 <section>
                                         <h2>Top-N Movie Recommendation for User I Final Version</h2>
                                 </section>
@@ -169,7 +161,31 @@
 									<li>MAE for Adjusted Rating</li>
 								</ol>
 						</ul>
-				</section>	
+				</section>
+   				<section>
+                                        <h2>Adjustments made to adjusted ratings in matrix B and how these adjustments affected the recommendations</h2>
+                                </section>
+                                <section>
+                                        <h2>Account for bias in ratings</h2>
+                                        <p><sup>r'</sup><sub>ij</sub> <sup>= r</sup><sub>ij</sub> <sup>- u</sup><sub>i</sub><sup> - m</sup><sub>j</sub></p>
+                                </section>
+				<section>
+                                        <h2>Improve our recommendations?</h2>
+                                        <p><sup>r'</sup><sub>ij</sub> <sup>= r</sup><sub>ij</sub> <sup>- [(global average rating*L - sum of user's ratings) / (L + number of user's ratings)] - [(global average rating*L - sum of movie's ratings) / (L + number of movie's ratings)]</sup>
+                                </section>
+                                <section>
+                                        <h2>Calculate Mean Absolute Error (MAE)</h2>
+                                        <p>MAE = (Σ|r<small style="vertical-align: bottom">ij</small>-r'<small style="vertical-align: bottom">ij</small>|) / N</p>
+                                        <small>N is the total number of ratings</small>
+                                </section>
+                                <section>
+                                        <h2>Compare MAE's</h2>
+                                        <table>
+                                        <tr><td>Avg. MAE for 1<sup>st</sup> approach</td><td>7.05972</td></tr>
+                                        <tr><td>Avg. MAE for 2<sup>nd</sup> approach (L = 100)</td><td>7.086661555</td></tr>
+                                        <tr><td>Avg. MAE for 2<sup>nd</sup> approach (L = 1,000,000)</td><td>7.059724242</td></tr>
+                                        </table>
+                                </section>
 				<section>
 					<h2>Program Flow</h2>
 					<p>MainClass: 
@@ -205,7 +221,7 @@
 						<li>preferences</li>
 					</ul>
 					<br />
-					<p>ex) women & horror </p>
+					<p> <small>Example, if user X is a woman looking for recommendations of horror movies, only use ratings provided by other women who have watched horror movies.</small></p>
 				</section>
 				<section>
 					<h2>Central DB</h2>
@@ -218,14 +234,6 @@
 						</ul>
 					</p>
 					<br />
-				</section>
-				<section>
-					<ul>
-						<li>cache SVD because this is an "expensive" calculation and people don't need updated recommendations constantly</li>
-						<li>account for timestamp of rating</li>
-						<li>more specifically account for user demographics/preferences by using smaller matrices -- eg, if user x is a woman looking for recommendations of horror movies, only use ratings provided by other women who have watched horror movies</li>
-						<li>Use one Central DB to manage the data to be more effectively processing dataset and avoid uncessacerry process</li>
-					</ul>
 				</section>
 			</div>
 		</div>

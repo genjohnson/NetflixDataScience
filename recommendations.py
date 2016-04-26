@@ -15,7 +15,7 @@ def movieTitleLookup(mid):
     movie_id, movie_title, release_date, video_release_date, imdb_url, unknown,genres = line.split('|', 6)
     print(movie_title)
 
-def svd(k=150):
+def svd(k=26):
   """
   Return the singular value decomposition of a matrix of adjusted ratings.
 
@@ -64,9 +64,8 @@ def svd(k=150):
   for i in range(len(elements[0])):
     rating_user_index = elements[0][i]
     rating_movie_index = elements[1][i]
-    adjusted_rating = ratings[i] - users[rating_user_index] - movies[rating_movie_index]
+    adjusted_rating = ratings[i] - average_rating_by_user[rating_user_index] - average_rating_by_movie[rating_movie_index]
     adjusted_ratings.append(adjusted_rating)
-  adjusted_ratings = np.array(adjusted_ratings).astype(np.int32)
 
   # Create a sparce matrix of the adjusted ratings.
   B = scipy.sparse.csr_matrix((adjusted_ratings, (users, movies)), dtype='d')

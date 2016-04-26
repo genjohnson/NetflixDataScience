@@ -60,14 +60,171 @@
 
 					Then we applied SVD to matrix B and chose a user to make recommendations for. This process is similar to the lab assignment that we completed for class.
 				</section>
+                                <section>
+                                        <h2>Adjustments made to adjusted ratings in matrix B and how these adjustments affected the recommendations</h2>
+                                </section>
+				<section>      
+                                        <h2>Environment</h2>
+                                        <ul>
+                                                <li>Development: Python3
+                                                        <ul>
+                                                                <li>Scipy</li>
+                                                                <li> Numpy</li>
+                                                                <li>linalg( scipy.sparse )</li>
+                                                        </ul>
+                                                <li>Test & Evaluation: Shell, Python3, excel </li>
+                                                <li>Working Environment: Github, GoogleDoc, reveal.js</li>
+                                        </ul>
+                                </section>
 				<section>
-					<h2>Adjustments made to adjusted ratings in matrix B and how these adjustments affected the recommendations</h2>
+					<h2>Work Flow</h2>
+					<ol>
+						<li>Top-Ten Movie Recommendation for user i</li>
+						<li>Fix Features on the Recommendation System</li>
+						<li>Accomodated k value</li>
+						<li>Top-N Movie Reccommendation for user i</li>
+						<li>Main-Algorithms improvement</li>
+					</ol>
+				</section>
+				<section>
+					<h2>Top-Ten Movie Recommendation for user i</h2>
+					<br />
+					<p> 
+						<ul>
+							<li>Done:</li>
+							<ul>
+								<li>Simple SVD by python library</li>
+								<li>Recommends top10 movieID</li>
+								<li>Visual Observation for the evaulation of result</li>
+								<li>Name Conversion</li>
+							</ul>
+							<li>Problem:</li>
+							<ul>
+								<li>No movie name</li>
+								<li>Recommendting some Watched Movie</li>
+							</ul>
+						</ul>		
+					</p>
+				</section>
+				<section>
+					<h2>Fix | Added Features</h2>
+					<p>
+						<ul>
+							<li>Done:</li>
+							<ul>
+								<li>Movie-Name Conversion</li>
+								<li>Recommending only Watched Movie</li>
+							</ul>
+						</ul>
+					</p>
+				</section>
+				<section>
+					<h2>Test for Remove watched movie</h2>
+					(Left to Right ) Function Not Applied, Function Applied
+					<img src="image/FunctionNotApplied.png" width="20%" height="20%"/>
+					<img src="image/FuctionApplied.png" width="20%" height="20%" />
+				</section>
+                                <section>
+                                        <h2>Accomodated K value</h2>
+                                	<br />
+					<p>
+						<ul>
+							<li>Original:</li>
+							<ul>
+								<li>k=150</li>
+							</ul>
+							<li>Changed:</li>
+							<ul>
+								<li>k=26</li>
+							</ul>
+						</ul>
+						<br />		
+						<br />
+						After k = 26, the order of top 10 movies changed, but there were no new movies added up in the top-10
+					</p>
+				</section>
+				<section>
+					<h2>Tests for changes in K</h2>
+					<img src="image/kVar.png" width="100%"/>
+				</section>
+				<section>
+					<h2>Tests for Changes in K</h2>
+				</section>
+                                <section>
+                                        <h2>Top-N Movie Recommendation for User I Final Version</h2>
+                                </section>
+                                <section>
+                                        <h2>Main-Algorithms Improvements</h2>
+					<p>
+						<ul>
+							<li>Purpose: </li>
+								<ol>
+									<li>To Decrease run-time / processing-time of System </li>
+									<li>To Increase Predictability</li>
+                                				</ol>
+							<li>Tried: </li>
+								<ol>
+									<li>Mean Square Error</li>
+									<li>Accomodation of K value</li>
+									<li>MAE for Adjusted Rating</li>
+								</ol>
+						</ul>
+				</section>	
+				<section>
+					<h2>Program Flow</h2>
+					<p>MainClass: 
+						<ul>
+							<p>recommendMovieForUser</p>
+                                                        <p>svd</p>
+                                                        <p>MovieTitleLookUp</p>
+						</ul>
+					</p>
+					<p>
+						recommendMovieForUser => svd => movieTitleLookUp => Recommend Top 10 Movie
+					</p>
+				</section>
+				<section>
+					<h2>Advancements in the Future</h2>
+				</section>
+				<section>
+					<h2> Caching Method </h2>
+					<br />
+					<ul>
+						<li>"Expensive" SVD</li>
+						<li>Regular Update</li>	
+					</ul>	
+				</section>
+				<section>
+					<h2>TimeFrame</h2>
+				</section>
+				<section>	
+					<h2>Small Matrix</h2>
+					<br />
+					<ul>
+						<li>demographics</li>	
+						<li>preferences</li>
+					</ul>
+					<br />
+					<p>ex) women & horror </p>
+				</section>
+				<section>
+					<h2>Central DB</h2>
+					<br />
+					<p>
+						No reading data from file system, but use one central DB
+						<ul>
+							<li>Increase Processing Time</li>
+							<li>Regular update Easy</li>
+						</ul>
+					</p>
+					<br />
 				</section>
 				<section>
 					<ul>
 						<li>cache SVD because this is an "expensive" calculation and people don't need updated recommendations constantly</li>
 						<li>account for timestamp of rating</li>
 						<li>more specifically account for user demographics/preferences by using smaller matrices -- eg, if user x is a woman looking for recommendations of horror movies, only use ratings provided by other women who have watched horror movies</li>
+						<li>Use one Central DB to manage the data to be more effectively processing dataset and avoid uncessacerry process</li>
 					</ul>
 				</section>
 			</div>
